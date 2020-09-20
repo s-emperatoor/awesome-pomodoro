@@ -11,9 +11,9 @@ local pomodoro_image_path = awful.util.getdir("config") ..
 local bonus
 
 -- values set by user
-local pomo_work_time = 2*60
-local pomo_break_time = 1*60
-local pomo_long_break_time = 1.5*60
+local pomo_work_time = 25*60
+local pomo_break_time = 5*60
+local pomo_long_break_time = 15*60
 local pomo_long_break_occur = 3
 
 -- the time that we use for caounting
@@ -230,7 +230,7 @@ pomodoro_widget:buttons(awful.util.table.join(awful.button({}, 1,
                         autostart = false,
                         single_shot = true,
                     })
-                    bonus:connect_signal("timeout",work_timeout)
+                    bonus:connect_signal("timeout",break_timeout)
                     bonus:start()
                     gears.debug.print_warning("state = 1 bonus run with time : "..t)
                 elseif pomo_state == 2 then
@@ -241,7 +241,7 @@ pomodoro_widget:buttons(awful.util.table.join(awful.button({}, 1,
                         autostart = false,
                         single_shot = true,
                     })
-                    bonus:connect_signal("timeout",work_timeout)
+                    bonus:connect_signal("timeout",long_break_timeout)
                     bonus:start()
                     gears.debug.print_warning("state = 2 bonus run with time : "..t)
                 end
